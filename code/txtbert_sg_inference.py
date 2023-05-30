@@ -158,7 +158,8 @@ def sg_inference(train_mode="manual", test_mode="manual"):
     test_ps = []
     test_rs = []
 
-    for k in range(20):
+    num_runs = 1
+    for k in range(num_runs):
         # Define the name of the model
         model_name = "txt_bert_sg_" + train_mode + str(k + 1)
 

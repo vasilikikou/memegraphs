@@ -134,7 +134,8 @@ test_f1s = []
 test_ps = []
 test_rs = []
 
-for k in range(20):
+num_runs = 1
+for k in range(num_runs):
     # Define the name of the model
     model_name = "img_bert" + str(k + 1)
 

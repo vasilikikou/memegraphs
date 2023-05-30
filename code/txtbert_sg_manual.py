@@ -193,9 +193,8 @@ epochs = 100
 # Define the number of epochs to wait for early stopping
 patience = 3
 
-seeds = [28407, 53497, 36632, 23865, 51044, 20919, 99867, 9428, 18188, 80992,
-         92357, 69448, 59241, 3929, 80762, 40255, 98970, 4242, 9459, 34028]
-for k in range(20):
+seeds = [80992]
+for k in range(len(seeds)):
     seed = seeds[k]
     random.seed(seed)
     np.random.seed(seed)
