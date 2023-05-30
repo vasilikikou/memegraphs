@@ -117,14 +117,6 @@ test_f1s = []
 test_ps = []
 test_rs = []
 
-# Weighted
-w_dev_f1s = []
-w_dev_ps = []
-w_dev_rs = []
-w_test_f1s = []
-w_test_ps = []
-w_test_rs = []
-####
 for k in range(20):
     # Define the name of the model
     model_name = "txt_bert" + str(k + 1)
@@ -158,7 +150,7 @@ for k in range(20):
     dev_r = round(recall_score(dev_true, list(dev_results.values())), 3)
     print("Scores for dev set")
     print("F1 =", dev_f1)
-    print("F1 =", f1_score(dev_true, list(dev_results.values()), average=None))
+    # print("F1 =", f1_score(dev_true, list(dev_results.values()), average=None))
     print("p =", dev_p)
     print("r =", dev_r)
 
@@ -167,20 +159,10 @@ for k in range(20):
     test_r = round(recall_score(test_true, list(test_results.values())), 3)
     print("Scores for test set")
     print("F1 =", test_f1)
-    print("F1 =", f1_score(test_true, list(test_results.values()), average=None))
+    # print("F1 =", f1_score(test_true, list(test_results.values()), average=None))
     print("p =", test_p)
     print("r =", test_r)
     print("********************************\n")
-
-    # Weighted
-    w_dev_f1 = round(f1_score(dev_true, list(dev_results.values()), average="weighted"), 3)
-    w_dev_p = round(precision_score(dev_true, list(dev_results.values()), average="weighted"), 3)
-    w_dev_r = round(recall_score(dev_true, list(dev_results.values()), average="weighted"), 3)
-
-    w_test_f1 = round(f1_score(test_true, list(test_results.values()), average="weighted"), 3)
-    w_test_p = round(precision_score(test_true, list(test_results.values()), average="weighted"), 3)
-    w_test_r = round(recall_score(test_true, list(test_results.values()), average="weighted"), 3)
-    ######
 
     dev_f1s.append(dev_f1)
     dev_ps.append(dev_p)
@@ -188,15 +170,6 @@ for k in range(20):
     test_f1s.append(test_f1)
     test_ps.append(test_p)
     test_rs.append(test_r)
-
-    # Weighted
-    w_dev_f1s.append(w_dev_f1)
-    w_dev_ps.append(w_dev_p)
-    w_dev_rs.append(w_dev_r)
-    w_test_f1s.append(w_test_f1)
-    w_test_ps.append(w_test_p)
-    w_test_rs.append(w_test_r)
-    #####
 
 
 best_f1 = np.amax(np.array(dev_f1s))
@@ -212,17 +185,4 @@ print("p = ", round(np.mean(test_ps), 3), "+-", round(stats.sem(test_ps), 3))
 print("r = ", round(np.mean(test_rs), 3), "+-", round(stats.sem(test_rs), 3))
 print("F1 = ", round(np.mean(test_f1s), 3), "+-", round(stats.sem(test_f1s), 3))
 
-# Weighted
-w_best_f1 = np.amax(np.array(w_dev_f1s))
-w_best_run = np.argmax(np.array(w_dev_f1s))
-print("Best weighted F1 score for dev set is = ", w_best_f1, " from run ", str(w_best_run + 1))
-print("Test scores:")
-print("p = ", w_test_ps[w_best_run])
-print("r = ", w_test_rs[w_best_run])
-print("F1 = ", w_test_f1s[w_best_run])
 
-print("\nMean scores for test and error of mean:")
-print("p = ", round(np.mean(w_test_ps), 3), "+-", round(stats.sem(w_test_ps), 3))
-print("r = ", round(np.mean(w_test_rs), 3), "+-", round(stats.sem(w_test_rs), 3))
-print("F1 = ", round(np.mean(w_test_f1s), 3), "+-", round(stats.sem(w_test_f1s), 3))
-#####
